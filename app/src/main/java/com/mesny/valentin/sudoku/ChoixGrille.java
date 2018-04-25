@@ -1,6 +1,7 @@
 package com.mesny.valentin.sudoku;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -67,7 +68,7 @@ public class ChoixGrille extends AppCompatActivity {
                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Start",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
+                                openGrille();
                             }
                         });
                 alertDialog.show();
@@ -84,6 +85,11 @@ public class ChoixGrille extends AppCompatActivity {
         grilles.add(new vGrille(1,2,3));
         grilles.add(new vGrille(1,2,3));
         return grilles;
+    }
+
+    public void openGrille(){
+        Intent intent = new Intent(this, SudokuGrille.class);
+        startActivity(intent);
     }
 
 
