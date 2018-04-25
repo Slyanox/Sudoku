@@ -62,6 +62,7 @@ public class Grille extends View{
             top = top + height + 5; // move to new row by changing the top co-ordinate
             left = 10;
         }
+        //Permet de dessiner les lignes derrière
         Paint line = new Paint();
         line.setStyle(Paint.Style.STROKE);
         line.setStrokeWidth(10);
