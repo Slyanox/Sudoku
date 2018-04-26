@@ -52,7 +52,7 @@ public class Grille extends View{
                 paint.setColor(Color.parseColor("#000000"));
                 paint.setTextSize(80);
                 if(listeChiffres.charAt(compteur) != '0'){
-                    canvas.drawText("" + listeChiffres.charAt(compteur), left + 55, top + 100, paint);
+                    canvas.drawText("" + listeChiffres.charAt(compteur), left + 50, top + 100, paint);
                 }
                 canvas.drawRect(left, top, left+width, top+height, paint);
                 left = (left + width + 5); // set new left co-ordinate + 10 pixel gap
@@ -70,5 +70,15 @@ public class Grille extends View{
         canvas.drawLine(6, 940,1400, 940, line);
         canvas.drawLine(470, 6,470, 1400, line);
         canvas.drawLine(940, 6,940, 1400, line);
+        //Permet de créer les chiffres pour le drag'n drop
+        canvas.drawText("1", 100, 1600, paint);
+        canvas.drawText("2", 250, 1600, paint);
+        canvas.drawText("3", 400, 1600, paint);
+        canvas.drawText("4", 550, 1600, paint);
+        canvas.drawText("5", 700, 1600, paint);
+        canvas.drawText("6", 850, 1600, paint);
+        canvas.drawText("7", 1000, 1600, paint);
+        canvas.drawText("8", 1150, 1600, paint);
+        canvas.drawText("9", 1300, 1600, paint);
     }
 }
