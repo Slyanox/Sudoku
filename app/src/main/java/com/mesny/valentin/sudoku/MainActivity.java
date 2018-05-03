@@ -17,13 +17,22 @@ public class MainActivity extends AppCompatActivity {
         buttonlvl1 = (Button) findViewById(R.id.buttonlvl1);
         buttonlvl1.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                openChoixGrille();
+                openGrille1();
             }
         });
     }
 
-    public void openChoixGrille(){
+    public void openGrille1(){
         Intent intent = new Intent(this, ChoixGrille.class);
+        int level = 1;
+        intent.putExtra("LEVEL", level);
+        startActivity(intent);
+    }
+
+    public void openGrille2(){
+        Intent intent = new Intent(this, ChoixGrille.class);
+        int level = 2;
+        intent.putExtra("LEVEL", level);
         startActivity(intent);
     }
 }

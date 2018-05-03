@@ -6,22 +6,29 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 /**
  * Created by Valentin on 25/04/2018.
  */
 
-public class Grille extends View{
+public class Grille extends View {
 
     private Rect rectangle;
     private Paint paint;
+    private Context contexttoast;
 
     public Grille(Context context, AttributeSet attrs) {
         super(context, attrs);
         int x = 0;
         int y = 0;
         int sideLength = 500;
+        this.contexttoast = context;
 
         // create a rectangle that we'll draw later
         rectangle = new Rect(x, y, sideLength, sideLength);
@@ -32,6 +39,58 @@ public class Grille extends View{
 
 
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int x = (int)event.getX();
+        int y = (int)event.getY();
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                CharSequence text = "" + getValueText(x, y);
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(contexttoast, text, duration);
+                toast.show();
+            case MotionEvent.ACTION_MOVE:
+                System.out.println("Move");
+        }
+        this.invalidate();
+        return true;
+    }
+
+    public int getValueText(int x, int y){
+        int ret = 0;
+        if(x > 25 && x < 175 && y > 1525 && y < 1675){
+            ret = 1;
+        }
+        else if(x > 175 && x < 325 && y > 1525 && y < 1675){
+            ret = 2;
+        }
+        else if(x > 325 && x < 475 && y > 1525 && y < 1675){
+            ret = 3;
+        }
+        else if(x > 475 && x < 625 && y > 1525 && y < 1675){
+            ret = 4;
+        }
+        else if(x > 625 && x < 775 && y > 1525 && y < 1675){
+            ret = 5;
+        }
+        else if(x > 775 && x < 925 && y > 1525 && y < 1675){
+            ret = 6;
+        }
+        else if(x > 925 && x < 1075 && y > 1525 && y < 1675){
+            ret = 7;
+        }
+        else if(x > 1075 && x < 1225 && y > 1525 && y < 1675){
+            ret = 8;
+        }
+        else if(x > 1225 && x < 1375 && y > 1525 && y < 1675){
+            ret = 9;
+        }
+
+        return ret;
+    }
+
 
     @Override
     public void onDraw(Canvas canvas){
