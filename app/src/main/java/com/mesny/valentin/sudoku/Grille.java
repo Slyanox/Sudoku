@@ -22,6 +22,9 @@ public class Grille extends View {
     private Rect rectangle;
     private Paint paint;
     private Context contexttoast;
+    public String listeChiffres = "096040001100060004504810390007950043030080000405023018010630059059070830003590007";
+    public int caseDown = 0;
+    public int caseUp = 0;
 
     public Grille(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -36,8 +39,6 @@ public class Grille extends View {
         // create the Paint and set its color
         paint = new Paint();
         paint.setColor(Color.GRAY);
-
-
     }
 
     @Override
@@ -46,17 +47,25 @@ public class Grille extends View {
         int y = (int)event.getY();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                CharSequence text = "" + getValueText(x, y);
+                caseDown = getValueText(x, y);
+                CharSequence text = "" + caseDown;
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(contexttoast, text, duration);
                 toast.show();
-            case MotionEvent.ACTION_MOVE:
-                System.out.println("Move");
+            case MotionEvent.ACTION_UP:
+                caseUp = getCase(x, y);
+                CharSequence text2 = "" + caseUp;
+                int duration2 = Toast.LENGTH_SHORT;
+
+                Toast toast2 = Toast.makeText(contexttoast, text2, duration2);
+                toast2.show();
+                //fillSudoku(listeChiffres, caseUp, caseDown);
         }
         this.invalidate();
         return true;
     }
+
 
     public int getValueText(int x, int y){
         int ret = 0;
@@ -91,13 +100,55 @@ public class Grille extends View {
         return ret;
     }
 
+    /**
+
+     * Retourne la case sélectionné
+
+     * Prend en paramètre les x et y
+
+     */
+
+    public int getCase(int x, int y){
+
+        int marge = 75;
+
+        int cases = 0;
+
+        for(int horiz = marge; horiz <= 1425; horiz += 160){
+            for(int vert = marge; vert <= 1450; vert += 160){
+                if((vert - marge < x) && (vert + marge > x) && (horiz - marge < y) && (horiz + marge > y)){
+                    return cases;
+                }
+                cases++;
+            }
+        }
+
+        return cases;
+
+    }
+
+
+
+    public void fillSudoku(String ligneSudoku, int cases, int numero){
+
+        String s = String.valueOf(numero);
+        char numerochar = s.charAt(0);
+        char[] charArray = ligneSudoku.toCharArray();
+
+        charArray[cases] = numerochar;
+
+        String ret = new String(charArray);
+
+        listeChiffres = ret;
+    }
+
 
     @Override
     public void onDraw(Canvas canvas){
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
         /*canvas.drawRect(rectangle, paint);*/
-        String listeChiffres = "096040001100060004504810390007950043030080000405023018010630059059070830003590007";
+
 
 
         int left = 10; // initial start position of rectangles (50 pixels from left)
